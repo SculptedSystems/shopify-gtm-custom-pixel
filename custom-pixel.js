@@ -22,6 +22,7 @@ const config = {
 
     track: {
       pageView: true,
+      viewItem: true,
       purchase: true,
     },
   },
@@ -78,12 +79,12 @@ function prepareItems(lineItems) {
 
   lineItems.forEach((item, index_) => {
     // parameter: item_id
-    const productId = item.variant?.id;
-    const productSku = item.variant?.sku;
+    const productId = item.variant.id;
+    const productSku = item.variant.sku;
     const item_id = config.shopify.useSku ? productSku : productId;
 
     // parameter: item_name
-    const item_name = item.variant?.product.title;
+    const item_name = item.variant.product.title;
 
     // parameter: affiliation
     const affiliation = config.shopify.storeName;
@@ -101,13 +102,13 @@ function prepareItems(lineItems) {
     const index = index_;
 
     // parameter: item_brand
-    const item_brand = item.variant?.product.vendor;
+    const item_brand = item.variant.product.vendor;
 
     // parameter: item_category
-    const item_category = item.variant?.product.type;
+    const item_category = item.variant.product.type;
 
     // parameter: item_variant
-    const item_variant = item.variant?.title;
+    const item_variant = item.variant.title;
 
     // parameter: price
     const price = item.finalLinePrice.amount;
@@ -165,20 +166,54 @@ if (config.gtm.track.pageView) {
 // Push Recommended Events to Data Layer
 // ============================
 
+if (config.gtm.track.viewItem) {
+  // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#view_item
+  // https://shopify.dev/docs/api/web-pixels-api/standard-events/product_viewed
+  analytics.subscribe("product_viewed", (event) => {
+    const eventData = event.data;
+    const productVariant = eventData.productVariant;
+
+    // parameter: currency
+    const currency = productVariant.price.currencyCode;
+
+    // parameter: value
+    const value = productVariant.price.amount;
+
+    // parameter: items
+    const lineItems = [
+      {
+        variant: productVariant,
+        discountAllocations: [],
+        finalLinePrice: productVariant.price,
+        quantity: 1,
+      },
+    ];
+    const items = prepareItems(lineItems);
+
+    dlPush({
+      event: "view_item",
+      currency: currency,
+      value: value,
+      items: items,
+    });
+  });
+}
+
 if (config.gtm.track.purchase) {
   // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#purchase
   // https://shopify.dev/docs/api/web-pixels-api/standard-events/checkout_completed
   analytics.subscribe("checkout_completed", (event) => {
-    const eventCheckoutData = event.data.checkout;
+    const eventData = event.data;
+    const checkout = eventData.checkout;
 
     // parameter: currency
-    const currency = eventCheckoutData.subtotalPrice?.currencyCode;
+    const currency = checkout.subtotalPrice?.currencyCode;
 
     // parameter: value
-    const value = eventCheckoutData.subtotalPrice?.amount || 0;
+    const value = checkout.subtotalPrice?.amount || 0;
 
     // parameter: customer_type
-    const firstOrder = eventCheckoutData.order?.customer?.isFirstOrder ?? true;
+    const firstOrder = checkout.order?.customer?.isFirstOrder ?? true;
     const customer_type = firstOrder ? "new" : "returning";
 
     // parameter: transaction_id
@@ -186,17 +221,17 @@ if (config.gtm.track.purchase) {
 
     // parameter: coupon
     const coupon = getCouponAsCommaSeperatedSTring(
-      eventCheckoutData.discountAllocations,
+      checkout.discountAllocations,
     );
 
     // parameter: shipping
-    const shipping = eventCheckoutData.shippingLine?.price.amount || 0;
+    const shipping = checkout.shippingLine?.price.amount || 0;
 
     // parameter: tax
-    const tax = eventCheckoutData.totalTax.amount || 0;
+    const tax = checkout.totalTax.amount || 0;
 
     // parameter: items
-    const lineItems = eventCheckoutData.lineItems;
+    const lineItems = checkout.lineItems;
     const items = prepareItems(lineItems);
 
     dlPush({
