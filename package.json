@@ -1,0 +1,20 @@
+{
+  "name": "shopify-custom-pixels",
+  "version": "1.0.0",
+  "description": "",
+  "main": "custom-pixel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SculptedSystems/shopify-custom-pixels.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/SculptedSystems/shopify-custom-pixels/issues"
+  },
+  "homepage": "https://github.com/SculptedSystems/shopify-custom-pixels#readme"
+}
