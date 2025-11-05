@@ -6,8 +6,8 @@
     "outDir": "./dist",
     // === Environment Settings === \\
     // (... See also https://aka.ms/tsconfig/module ... ) \\
-    "target": "es2020",
     "module": "none",
+    "target": "es2020",
     "moduleResolution": "classic",
     "lib": [
       "dom",
@@ -42,6 +42,7 @@
     "src/**/*"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "tests"
   ]
 }
