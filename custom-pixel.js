@@ -25,6 +25,7 @@ const config = {
       viewItemList: true,
       viewItem: true,
       addToCart: true,
+      viewCart: true,
       purchase: true,
     },
   },
@@ -275,6 +276,45 @@ if (config.gtm.track.addToCart) {
 
     dlPush({
       event: "add_to_cart",
+      currency: currency,
+      value: value,
+      items: items,
+    });
+  });
+}
+
+if (config.gtm.track.viewCart) {
+  // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#view_cart
+  // https://shopify.dev/docs/api/web-pixels-api/standard-events/cart_viewed
+  analytics.subscribe("cart_viewed", (event) => {
+    const eventData = event.data;
+    const cart = eventData.cart;
+
+    if (!cart) {
+      return;
+    }
+
+    // parameter: currency
+    const currency = cart.cost.totalAmount.currencyCode;
+
+    // parameter: currency
+    const value = cart.cost.totalAmount.amount;
+
+    // parameter: items
+    const productObjects = [];
+    cart.lines.forEach((line, index_) => {
+      productObjects.push({
+        productVariant: line.merchandise,
+        quantity: line.quantity,
+        discountAllocations: [],
+      });
+    });
+
+    const lineItems = prepareLineItemsFromProductObjects(productObjects);
+    const items = prepareItemsFromLineItems(lineItems);
+
+    dlPush({
+      event: "view_cart",
       currency: currency,
       value: value,
       items: items,
