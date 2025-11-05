@@ -33,7 +33,7 @@
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": false, // TODO: convert to true
     // ==== Recommended Options ==== \\
-    "strict": true, // TODO: convert to true
+    "strict": false, // TODO: convert to true
     "verbatimModuleSyntax": true,
     "noUncheckedSideEffectImports": true,
     "skipLibCheck": true

@@ -106,7 +106,7 @@ function getCouponFromDiscountApplications(
   return (
     filteredApplications
       .map((dApp) => dApp.title) // get the codes
-      .sort((a, b) => a.localeCompare(b)) // sort alphabetically
+      .sort((a: string, b: string) => a.localeCompare(b)) // sort alphabetically
       .join(",") || // comma separated string
     undefined
   );

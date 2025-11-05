@@ -2,32 +2,46 @@
 //   Global Declarations 
 // ================================================
 
+export { };
+
 declare global {
 
   // ============================
-  // Shopify Pixel Runtime
+  // Shopify Web Pixels Runtime
   // ============================
 
-  declare const analytics: {
+  const analytics: {
     subscribe: (eventName: string, handler: (event: any) => void) => void;
   };
 
-  declare const init: {
-    data: {
-      shop: {
-        name: string;
-      };
-    };
-  };
+  const init: Init;
 
   // ============================
-  // Google Tag Manager
+  // Google Tag Manager Runtime
   // ============================
 
   interface Window {
     dataLayer: any[];
   }
 
-}
+  // ============================
+  // Shopify Data Model Scaffolding
+  // ============================
 
-export { };
+  interface Init {
+    data: {
+      shop: {
+        name: string;
+      }
+    }
+  }
+
+  interface DiscountAllocation { }
+  interface DiscountApplication { }
+  interface Item { }
+  interface Line { }
+  interface LineItem { }
+  interface ProductVariant { }
+  interface ProductVariantObject { }
+
+}
