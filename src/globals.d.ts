@@ -1,21 +1,33 @@
 // ================================================
-//   Global Declarations for Shopify Pixel Runtime
+//   Global Declarations 
 // ================================================
 
-declare const analytics: {
-  subscribe: (eventName: string, handler: (event: any) => void) => void;
-};
+declare global {
 
-declare const init: {
-  data: {
-    shop: {
-      name: string;
+  // ============================
+  // Shopify Pixel Runtime
+  // ============================
+
+  declare const analytics: {
+    subscribe: (eventName: string, handler: (event: any) => void) => void;
+  };
+
+  declare const init: {
+    data: {
+      shop: {
+        name: string;
+      };
     };
   };
-};
 
-declare global {
+  // ============================
+  // Google Tag Manager
+  // ============================
+
   interface Window {
     dataLayer: any[];
   }
+
 }
+
+export { };
