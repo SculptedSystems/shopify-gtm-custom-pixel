@@ -49,7 +49,12 @@ window.dataLayer = window.dataLayer || [];
 
   // Grab the first <script> tag and create a new GTM script element
   const f = d.getElementsByTagName(s)[0];
-  const j = d.createElement(s) as HTMLScriptElement; // 👈 Explicit cast fixes 'async'/'src' errors
+  if (!f || !f.parentNode) {
+    console.warn("GTM Pixel: No script tag found to insert before.");
+    return;
+  }
+
+  const j = d.createElement(s) as HTMLScriptElement;
   const dl = l !== "dataLayer" ? "&l=" + l : "";
 
   // Set script attributes
@@ -57,7 +62,8 @@ window.dataLayer = window.dataLayer || [];
   j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
 
   // Insert GTM <script> before the first script tag
-  f.parentNode!.insertBefore(j, f);
+  f.parentNode.insertBefore(j, f);
+
 })(window, document, "script", "dataLayer", config.gtm.id);
 
 
@@ -65,13 +71,13 @@ window.dataLayer = window.dataLayer || [];
 // Declare Helper Functions
 // ============================
 
-function consoleLog(log) {
+function consoleLog(log: string) {
   if (config.pixel.logging) {
     console.log(`Custom Pixel "${config.pixel.name}": ${log}`);
   }
 }
 
-function dataLayerPush(message) {
+function dataLayerPush(message: object) {
   consoleLog(
     `Pushing Message to Data Layer -> ${JSON.stringify(message, null, 2)}`,
   );
@@ -80,7 +86,7 @@ function dataLayerPush(message) {
 
 function getCouponFromDiscountApplications(
   discountApplications,
-  appliesToWholeCart,
+  appliesToWholeCart: boolean,
 ) {
   const discountCodeApplications = discountApplications?.filter(
     (dApp) => dApp.type === "DISCOUNT_CODE",
@@ -108,7 +114,7 @@ function getCouponFromDiscountApplications(
 
 function getCouponFromDiscountAllocations(
   discountAllocations,
-  appliesToWholeCart,
+  appliesToWholeCart: boolean,
 ) {
   const discountApplications = discountAllocations?.map(
     (dAllo) => dAllo.discountApplication,
@@ -123,7 +129,7 @@ function getCouponFromDiscountAllocations(
 function prepareItemsFromLineItems(lineItems) {
   const items = [];
 
-  lineItems.forEach((item, index_) => {
+  lineItems.forEach((item, index_: number) => {
     // parameter: item_id
     const productId = item.variant.id;
     const productSku = item.variant.sku;
