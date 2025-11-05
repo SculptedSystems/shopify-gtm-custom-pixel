@@ -2,9 +2,13 @@
   "name": "shopify-custom-pixels",
   "version": "1.0.0",
   "description": "",
-  "main": "custom-pixel.js",
+  "main": "dist/pixel.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "vitest run --config ./vitest.config.ts",
+    "test:watch": "vitest --config ./vitest.config.ts",
+    "test:coverage": "vitest run --config ./vitest.config.ts --coverage"
   },
   "repository": {
     "type": "git",
@@ -18,6 +22,9 @@
   },
   "homepage": "https://github.com/SculptedSystems/shopify-custom-pixels#readme",
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "@vitest/coverage-v8": "^4.0.7",
+    "jsdom": "^27.1.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.7"
   }
 }
