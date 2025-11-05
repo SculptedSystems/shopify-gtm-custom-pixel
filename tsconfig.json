@@ -6,13 +6,20 @@
     "outDir": "./dist",
     // === Environment Settings === \\
     // (... See also https://aka.ms/tsconfig/module ... ) \\
-    "module": "nodenext",
-    "target": "esnext",
-    "types": [],
+    "target": "es2020",
+    "module": "none",
+    "moduleResolution": "classic",
+    "lib": [
+      "dom",
+      "es2020"
+    ],
+    // === Ensure no module boilerplate ===
+    "isolatedModules": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": false,
     // === Other Outputs === \\
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
+    "sourceMap": false,
+    "declaration": false,
     "removeComments": false,
     "preserveConstEnums": true,
     // ==== Style Options ==== \\
@@ -28,9 +35,7 @@
     // ==== Recommended Options ==== \\
     "strict": false, // TODO: convert to true
     "verbatimModuleSyntax": true,
-    "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
     "skipLibCheck": true
   },
   "include": [
