@@ -1,8 +1,13 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll } from "vitest";
 
-describe('dummy test', () => {
-	it('returns true', () => {
-		expect(true).toBe(true);
+describe("pixel script", () => {
+	beforeAll(async () => {
+		// Vitest will have jsdom ready here
+		await import("../src/pixel");
 	});
 
+	it("should pass this dummy test", () => {
+		expect(true).toBe(true);
+	});
 });
+
