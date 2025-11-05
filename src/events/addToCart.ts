@@ -6,7 +6,6 @@ import { prepareItemsFromLineItems } from "@helpers/items";
 
 import { dataLayerPush } from "@helpers/dataLayer";
 
-
 export function registerAddToCart() {
   analytics.subscribe("product_added_to_cart", (event) => {
     const eventData = event.data;

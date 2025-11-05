@@ -5,4 +5,3 @@ export function consoleLog(log: string) {
     console.log(`Custom Pixel "${config.pixel.name}": ${log}`);
   }
 }
-

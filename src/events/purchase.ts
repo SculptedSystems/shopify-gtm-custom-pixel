@@ -1,11 +1,10 @@
 // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#purchase
 // https://shopify.dev/docs/api/web-pixels-api/standard-events/checkout_completed
 
-import { prepareItemsFromLineItems } from "@helpers/items";
 import { getCouponFromDiscountApplications } from "@helpers/discount";
+import { prepareItemsFromLineItems } from "@helpers/items";
 
 import { dataLayerPush } from "@helpers/dataLayer";
-
 
 export function registerPurchase() {
   analytics.subscribe("checkout_completed", (event) => {

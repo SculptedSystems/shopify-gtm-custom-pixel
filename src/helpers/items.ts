@@ -1,4 +1,4 @@
-import { config } from "@core/config"
+import { config } from "@core/config";
 import { getCouponFromDiscountAllocations } from "@helpers/discount";
 
 export function prepareItemsFromLineItems(lineItems) {
@@ -78,4 +78,3 @@ export function prepareLineItemsFromProductObjects(productVariantObjects) {
 
   return lineItems;
 }
-

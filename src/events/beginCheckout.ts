@@ -6,7 +6,6 @@ import { getCouponFromDiscountApplications } from "@helpers/discount";
 
 import { dataLayerPush } from "@helpers/dataLayer";
 
-
 export function registerBeginCheckout() {
   analytics.subscribe("checkout_started", (event) => {
     const eventData = event.data;

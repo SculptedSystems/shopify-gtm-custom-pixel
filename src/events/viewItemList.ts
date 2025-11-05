@@ -6,9 +6,7 @@ import { prepareLineItemsFromProductObjects } from "@helpers/items";
 
 import { dataLayerPush } from "@helpers/dataLayer";
 
-
 export function registerViewItemList() {
-
   analytics.subscribe("collection_viewed", (event) => {
     const eventData = event.data;
     const productVariants = eventData.collection.productVariants;

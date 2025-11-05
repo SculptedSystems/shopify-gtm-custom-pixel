@@ -6,7 +6,6 @@ import { getCouponFromDiscountApplications } from "@helpers/discount";
 
 import { dataLayerPush } from "@helpers/dataLayer";
 
-
 export function registerAddShippingInfo() {
   analytics.subscribe("checkout_address_info_submitted", (event) => {
     const eventData = event.data;

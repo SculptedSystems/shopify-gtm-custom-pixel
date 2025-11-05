@@ -5,27 +5,16 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      "@core/*": [
-        "core/*"
-      ],
-      "@helpers/*": [
-        "helpers/*"
-      ],
-      "@events/*": [
-        "events/*"
-      ],
-      "@types/*": [
-        "types/*"
-      ]
+      "@core/*": ["core/*"],
+      "@helpers/*": ["helpers/*"],
+      "@events/*": ["events/*"],
+      "@types/*": ["types/*"]
     },
     // === Environment Settings ===
     "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "NodeNext",
-    "lib": [
-      "DOM",
-      "ES2020"
-    ],
+    "lib": ["DOM", "ES2020"],
     // === Interop & Imports ===
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -48,11 +37,6 @@
     // === Misc ===
     "skipLibCheck": true
   },
-  "include": [
-    "src",
-    "tests"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src", "tests"],
+  "exclude": ["node_modules"]
 }

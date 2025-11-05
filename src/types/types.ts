@@ -2,6 +2,6 @@
 //   Local Type Definitions
 // ================================================
 
-export interface PixelConfig { }
+export interface PixelConfig {}
 
-export interface GTMMessage { }
+export interface GTMMessage {}

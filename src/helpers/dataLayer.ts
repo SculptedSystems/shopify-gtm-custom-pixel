@@ -1,4 +1,4 @@
-import { consoleLog } from "@core/log"
+import { consoleLog } from "@core/log";
 
 export function dataLayerPush(message: object) {
   consoleLog(

@@ -3,7 +3,6 @@
 
 import { dataLayerPush } from "@helpers/dataLayer";
 
-
 export function registerPageView() {
   analytics.subscribe("page_viewed", (event) => {
     const eventContext = event.context?.document;

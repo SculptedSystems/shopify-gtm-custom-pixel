@@ -5,12 +5,11 @@
 import { config } from "@core/config";
 
 export function initializeGTM(): void {
-
   // Initialize Data Layer
   window.dataLayer = window.dataLayer || [];
 
   // Initialize Google Tag Manager
-  (function(w: Window, d: Document, s: string, l: string, i: string) {
+  (function (w: Window, d: Document, s: string, l: string, i: string) {
     // Ensure the dataLayer exists
     (w as any)[l] = (w as any)[l] || [];
     (w as any)[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -31,7 +30,5 @@ export function initializeGTM(): void {
 
     // Insert GTM <script> before the first script tag
     f.parentNode.insertBefore(j, f);
-
   })(window, document, "script", "dataLayer", config.gtm.id);
-
 }
