@@ -1,7 +1,6 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // === File Layout === \\
+    // === File Layout ===
     "rootDir": "./src",
     "outDir": "./dist",
     "baseUrl": "./src",
@@ -19,44 +18,41 @@
         "types/*"
       ]
     },
-    // === Environment Settings === \\
-    // (... See also https://aka.ms/tsconfig/module ... ) \\
-    "module": "none",
-    "target": "es2020",
-    "moduleResolution": "classic",
+    // === Environment Settings ===
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
     "lib": [
-      "dom",
-      "es2020"
+      "DOM",
+      "ES2020"
     ],
-    // === Ensure no module boilerplate ===
+    // === Interop & Imports ===
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "isolatedModules": false,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": false,
-    // === Other Outputs === \\
+    // === Output ===
     "sourceMap": false,
     "declaration": false,
     "removeComments": false,
     "preserveConstEnums": true,
-    // ==== Style Options ==== \\
+    // === Style / Strictness ===
+    "strict": false, // TODO: enable later
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noPropertyAccessFromIndexSignature": true,
-    "noUnusedParameters": true,
-    // === Stricter Typechecking Options === \\
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": false, // TODO: convert to true
-    // ==== Recommended Options ==== \\
-    "strict": false, // TODO: convert to true
-    "noUncheckedSideEffectImports": true,
+    "exactOptionalPropertyTypes": false,
+    // === Misc ===
     "skipLibCheck": true
   },
   "include": [
-    "src/**/*"
+    "src",
+    "tests"
   ],
   "exclude": [
-    "node_modules",
-    "tests"
+    "node_modules"
   ]
 }
