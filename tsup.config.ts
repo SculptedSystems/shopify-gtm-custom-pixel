@@ -1,14 +1,14 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts"], // your entry file
-  format: ["iife"], // immediately-invoked function expression (self-contained)
+  entry: ["src/index.ts"],
+  format: ["iife"],
   outExtension: () => ({ js: ".js" }),
   outDir: "dist",
   target: "es2020",
-  minify: false, // keep readable
+  minify: true,
   sourcemap: false,
-  clean: true, // clear dist/
+  clean: true,
   treeshake: true,
   platform: "browser",
   banner: {

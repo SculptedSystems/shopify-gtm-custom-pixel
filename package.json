@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
+    "start": "npm-run-series check",
     "build": "tsup",
     "check": "npm-run-series lint:check format:check test build",
     "test": "vitest run --config ./vitest.config.ts",
