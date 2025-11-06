@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsup",
+    "start": "npm-run-series check build:prod",
     "build:dev": "cross-env NODE_ENV=development tsup",
     "build:stage": "cross-env NODE_ENV=staging tsup",
     "build:prod": "cross-env NODE_ENV=production tsup",
