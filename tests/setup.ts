@@ -1,4 +1,4 @@
-import type { DataLayer } from "@types/types";
+import { DataLayer } from "@models/locals";
 
 // Assign a mock window with proper type
 Object.assign(globalThis, {

@@ -2,7 +2,7 @@
 //   Global Declarations
 // ================================================
 
-import { DataLayer } from "@types/types";
+import { DataLayer } from "@models/locals";
 
 export {};
 
