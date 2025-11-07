@@ -33,8 +33,13 @@ export function getLineItemDiscountFromDiscountAllocations(
     discount += da.amount.amount;
   });
 
-  return discount;
+  if (discount === 0) {
+    return undefined;
+  } else {
+    return discount;
+  }
 }
+
 export function getLineItemCouponFromDiscountAllocations(discountAllocations) {
   const discountApplications = discountAllocations.map(
     (dAllo) => dAllo.discountApplication,
