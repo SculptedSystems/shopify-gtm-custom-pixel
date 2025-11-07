@@ -1,8 +1,8 @@
 // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#begin_checkout
 // https://shopify.dev/docs/api/web-pixels-api/standard-events/checkout_started
 
+import { getWholeCartCouponFromDiscountApplications } from "@helpers/discount";
 import { prepareItemsFromLineItems } from "@helpers/items";
-import { getCouponFromDiscountApplications } from "@helpers/discount";
 
 import { dataLayerPush } from "@helpers/dataLayer";
 
@@ -18,9 +18,8 @@ export function registerBeginCheckout() {
     const value = checkout.subtotalPrice.amount;
 
     // parameter: coupon
-    const coupon = getCouponFromDiscountApplications(
+    const coupon = getWholeCartCouponFromDiscountApplications(
       checkout.discountApplications,
-      true,
     );
 
     // parameter: items

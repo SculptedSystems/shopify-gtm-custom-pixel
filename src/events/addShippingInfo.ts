@@ -1,8 +1,8 @@
 // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#add_shipping_info
 // https://shopify.dev/docs/api/web-pixels-api/standard-events/checkout_address_info_submitted
 
+import { getWholeCartCouponFromDiscountApplications } from "@helpers/discount";
 import { prepareItemsFromLineItems } from "@helpers/items";
-import { getCouponFromDiscountApplications } from "@helpers/discount";
 
 import { dataLayerPush } from "@helpers/dataLayer";
 
@@ -18,9 +18,8 @@ export function registerAddShippingInfo() {
     const value = checkout.subtotalPrice?.amount || 0;
 
     // parameter: coupon
-    const coupon = getCouponFromDiscountApplications(
+    const coupon = getWholeCartCouponFromDiscountApplications(
       checkout.discountApplications,
-      true,
     );
 
     // parameter: shipping_tier

@@ -1,7 +1,7 @@
 // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#purchase
 // https://shopify.dev/docs/api/web-pixels-api/standard-events/checkout_completed
 
-import { getCouponFromDiscountApplications } from "@helpers/discount";
+import { getWholeCartCouponFromDiscountApplications } from "@helpers/discount";
 import { prepareItemsFromLineItems } from "@helpers/items";
 
 import { dataLayerPush } from "@helpers/dataLayer";
@@ -25,9 +25,8 @@ export function registerPurchase() {
     const transaction_id = event.id;
 
     // parameter: coupon
-    const coupon = getCouponFromDiscountApplications(
+    const coupon = getWholeCartCouponFromDiscountApplications(
       checkout.discountApplications,
-      true,
     );
 
     // parameter: shipping

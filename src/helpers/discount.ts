@@ -1,24 +1,22 @@
-export function getCouponFromDiscountApplications(
-  discountApplications,
-  appliesToWholeCart: boolean,
-) {
-  const discountCodeApplications = discountApplications?.filter(
-    (dApp) => dApp.type === "DISCOUNT_CODE",
-  );
+import { consoleLog } from "@core/log";
 
-  let filteredApplications;
-  if (appliesToWholeCart) {
-    filteredApplications = discountCodeApplications.filter(
-      (dApp) => dApp.targetSelection === "ALL",
-    ); // discount for all lines
-  } else {
-    filteredApplications = discountCodeApplications.filter((dApp) =>
-      ["ENTITLED", "EXPLICIT"].includes(dApp.targetSelection),
-    ); // discount for some lines
-  }
+function discountApplicationIsWholeCart(discountApplication) {
+  consoleLog(JSON.stringify(discountApplication, null, 2));
+  return discountApplication.targetSelection === "ALL";
+}
 
+function discountApplicationIsLineItem(discountApplication) {
+  return ["ENTITLED", "EXPLICIT"].includes(discountApplication.targetSelection);
+}
+
+function discountApplicationIsCouponCode(discountApplication) {
+  return discountApplication.type === "DISCOUNT_CODE";
+}
+
+function getCombinedCouponFromDiscountApplications(discountApplications) {
   return (
-    filteredApplications
+    discountApplications
+      .filter((dApp) => discountApplicationIsCouponCode(dApp)) // filter for type is discount code
       .map((dApp) => dApp.title) // get the codes
       .sort((a: string, b: string) => a.localeCompare(b)) // sort alphabetically
       .join(",") || // comma separated string
@@ -26,16 +24,39 @@ export function getCouponFromDiscountApplications(
   );
 }
 
-export function getCouponFromDiscountAllocations(
+export function getLineItemDiscountFromDiscountAllocations(
   discountAllocations,
-  appliesToWholeCart: boolean,
 ) {
-  const discountApplications = discountAllocations?.map(
-    (dAllo) => dAllo.discountApplication,
+  const lineItemdDiscountAllocations = discountAllocations.filter((dAllo) =>
+    discountApplicationIsLineItem(dAllo.discountApplication),
   );
 
-  return getCouponFromDiscountApplications(
-    discountApplications,
-    appliesToWholeCart,
+  let discount = 0;
+  lineItemdDiscountAllocations.forEach((da) => {
+    discount += da.amount.amount;
+  });
+
+  return discount;
+}
+export function getLineItemCouponFromDiscountAllocations(discountAllocations) {
+  const discountApplications = discountAllocations.map(
+    (dAllo) => dAllo.discountApplication,
+  );
+  const lineItemDiscountApplications = discountApplications.filter((dApp) =>
+    discountApplicationIsLineItem(dApp),
+  );
+  return getCombinedCouponFromDiscountApplications(
+    lineItemDiscountApplications,
+  );
+}
+
+export function getWholeCartCouponFromDiscountApplications(
+  discountApplications,
+) {
+  const wholeCartDiscountApplications = discountApplications.filter((dApp) =>
+    discountApplicationIsWholeCart(dApp),
+  );
+  return getCombinedCouponFromDiscountApplications(
+    wholeCartDiscountApplications,
   );
 }

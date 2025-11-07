@@ -1,5 +1,8 @@
 import { config } from "@core/config";
-import { getCouponFromDiscountAllocations } from "@helpers/discount";
+import {
+  getLineItemCouponFromDiscountAllocations,
+  getLineItemDiscountFromDiscountAllocations,
+} from "@helpers/discount";
 
 export function prepareItemsFromLineItems(lineItems) {
   const items = [];
@@ -17,16 +20,14 @@ export function prepareItemsFromLineItems(lineItems) {
     const affiliation = config.shopify.storeName;
 
     // parameter: coupon
-    const coupon = getCouponFromDiscountAllocations(
+    const coupon = getLineItemCouponFromDiscountAllocations(
       item.discountAllocations,
-      false,
     );
 
     // parameter: discount
-    let discount = 0; // TODO: ensure this only applies for non-wholeCart discounts
-    item.discountAllocations.forEach((da) => {
-      discount += da.amount.amount;
-    });
+    const discount = getLineItemDiscountFromDiscountAllocations(
+      item.discountAllocations,
+    );
 
     // parameter: index
     const index = index_;
