@@ -1,15 +1,25 @@
 // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#add_to_cart
 // https://shopify.dev/docs/api/web-pixels-api/standard-events/product_added_to_cart
+import {
+  EventProductAddedToCart,
+  PartialCheckoutLineItem,
+} from "@models/shopify";
 
-import { prepareLineItemsFromProductObjects } from "@helpers/items";
+import { addFinalLinePriceToPartialLineItems } from "@helpers/items";
 import { prepareItemsFromLineItems } from "@helpers/items";
 import { dataLayerPush } from "@helpers/dataLayer";
 
-import { buildEventHandler } from "@utils/handleEvent";
+import { buildEventHandler } from "@utils/buildEventHandler";
+import { logger } from "@utils/logger";
 
-function handleAddToCart(event) {
+function handleAddToCart(event: EventProductAddedToCart) {
   const eventData = event.data;
   const cartLine = eventData.cartLine;
+
+  if (!cartLine) {
+    logger.debug("cartLine is null. Not pushing event.");
+    return;
+  }
 
   // parameter: currency
   const currency = cartLine.cost.totalAmount.currencyCode;
@@ -19,15 +29,18 @@ function handleAddToCart(event) {
 
   // parameter: items
   const productVariant = cartLine.merchandise;
-  const quantity = cartLine.quantity;
-  const productObjects = [
+  const quantity = cartLine?.quantity || 0;
+  const partialCheckoutLineItems: PartialCheckoutLineItem[] = [
     {
-      productVariant: productVariant,
-      quantity: quantity,
       discountAllocations: [],
+      finalLinePrice: null,
+      quantity: quantity,
+      variant: productVariant,
     },
   ];
-  const lineItems = prepareLineItemsFromProductObjects(productObjects);
+  const lineItems = addFinalLinePriceToPartialLineItems(
+    partialCheckoutLineItems,
+  );
   const items = prepareItemsFromLineItems(lineItems);
 
   dataLayerPush({

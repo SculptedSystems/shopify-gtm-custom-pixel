@@ -1,7 +1,7 @@
 // ================================================
 //   Global Declarations
 // ================================================
-
+import { Analytics, Init } from "@models/shopify";
 import { DataLayer } from "@models/locals";
 
 export {};
@@ -10,31 +10,13 @@ declare global {
   // ============================
   // Shopify Web Pixels Runtime
   // ============================
-  //const analytics: {
-  //subscribe: (eventName: string, handler: (event: any) => void) => void;
-  //};
-  //const init: Init;
+  const init: Init;
+  const analytics: Analytics;
+
   // ============================
   // Google Tag Manager Runtime
   // ============================
   interface Window {
     dataLayer: DataLayer;
   }
-  // ============================
-  // Shopify Data Model Scaffolding
-  // ============================
-  //interface Init {
-  //data: {
-  //shop: {
-  //name: string;
-  //};
-  //};
-  //}
-  //interface DiscountAllocation {}
-  //interface DiscountApplication {}
-  //interface Item {}
-  //interface Line {}
-  //interface LineItem {}
-  //interface ProductVariant {}
-  //interface ProductVariantObject {}
 }

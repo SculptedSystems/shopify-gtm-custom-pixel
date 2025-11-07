@@ -3,6 +3,7 @@ import {
   getLineItemCouponFromDiscountAllocations,
   getLineItemDiscountFromDiscountAllocations,
 } from "@helpers/discount";
+import { PartialCheckoutLineItem } from "@models/shopify";
 
 export function prepareItemsFromLineItems(lineItems) {
   const items = [];
@@ -65,13 +66,15 @@ export function prepareItemsFromLineItems(lineItems) {
   return items;
 }
 
-export function prepareLineItemsFromProductObjects(productVariantObjects) {
-  const lineItems = [];
+export function addFinalLinePriceToPartialLineItems(
+  partialLineItems: PartialCheckoutLineItem[],
+) {
+  const lineItems: PartialCheckoutLineItem[] = [];
 
-  productVariantObjects.forEach((obj) => {
+  partialLineItems.forEach((obj) => {
     lineItems.push({
-      variant: obj.productVariant,
-      finalLinePrice: obj.productVariant.price,
+      variant: obj.variant,
+      finalLinePrice: obj.variant?.price || null,
       quantity: obj.quantity,
       discountAllocations: obj.discountAllocations,
     });

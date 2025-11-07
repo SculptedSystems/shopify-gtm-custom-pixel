@@ -1,13 +1,14 @@
 // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#view_cart
 // https://shopify.dev/docs/api/web-pixels-api/standard-events/cart_viewed
+import { EventCartViewed, PartialCheckoutLineItem } from "@models/shopify";
 
 import { prepareItemsFromLineItems } from "@helpers/items";
-import { prepareLineItemsFromProductObjects } from "@helpers/items";
+import { addFinalLinePriceToPartialLineItems } from "@helpers/items";
 import { dataLayerPush } from "@helpers/dataLayer";
 
-import { buildEventHandler } from "@utils/handleEvent";
+import { buildEventHandler } from "@utils/buildEventHandler";
 
-function handleViewCart(event) {
+function handleViewCart(event: EventCartViewed) {
   const eventData = event.data;
   const cart = eventData.cart;
 
@@ -22,16 +23,17 @@ function handleViewCart(event) {
   const value = cart.cost.totalAmount.amount;
 
   // parameter: items
-  const productObjects = [];
+  const partialLineItems: PartialCheckoutLineItem[] = [];
   cart.lines.forEach((line) => {
-    productObjects.push({
-      productVariant: line.merchandise,
-      quantity: line.quantity,
+    partialLineItems.push({
       discountAllocations: [],
+      finalLinePrice: null,
+      quantity: line.quantity,
+      variant: line.merchandise,
     });
   });
 
-  const lineItems = prepareLineItemsFromProductObjects(productObjects);
+  const lineItems = addFinalLinePriceToPartialLineItems(partialLineItems);
   const items = prepareItemsFromLineItems(lineItems);
 
   dataLayerPush({

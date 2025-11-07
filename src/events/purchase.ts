@@ -1,13 +1,14 @@
 // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#purchase
 // https://shopify.dev/docs/api/web-pixels-api/standard-events/checkout_completed
+import { EventCheckoutCompleted } from "@models/shopify";
 
 import { getWholeCartCouponFromDiscountApplications } from "@helpers/discount";
 import { prepareItemsFromLineItems } from "@helpers/items";
 import { dataLayerPush } from "@helpers/dataLayer";
 
-import { buildEventHandler } from "@utils/handleEvent";
+import { buildEventHandler } from "@utils/buildEventHandler";
 
-function handlePurchase(event) {
+function handlePurchase(event: EventCheckoutCompleted) {
   const eventData = event.data;
   const checkout = eventData.checkout;
 
@@ -30,7 +31,7 @@ function handlePurchase(event) {
   );
 
   // parameter: shipping
-  const shipping = checkout.shippingLine?.price.amount || 0;
+  const shipping = checkout.shippingLine?.price?.amount || 0;
 
   // parameter: tax
   const tax = checkout.totalTax.amount || 0;
