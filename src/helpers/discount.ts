@@ -1,16 +1,26 @@
-function discountApplicationIsWholeCart(discountApplication) {
+import { DiscountAllocation, DiscountApplication } from "@models/shopify";
+
+function discountApplicationIsWholeCart(
+  discountApplication: DiscountApplication,
+) {
   return discountApplication.targetSelection === "ALL";
 }
 
-function discountApplicationIsLineItem(discountApplication) {
+function discountApplicationIsLineItem(
+  discountApplication: DiscountApplication,
+) {
   return ["ENTITLED", "EXPLICIT"].includes(discountApplication.targetSelection);
 }
 
-function discountApplicationIsCouponCode(discountApplication) {
+function discountApplicationIsCouponCode(
+  discountApplication: DiscountApplication,
+) {
   return discountApplication.type === "DISCOUNT_CODE";
 }
 
-function getCombinedCouponFromDiscountApplications(discountApplications) {
+function getCombinedCouponFromDiscountApplications(
+  discountApplications: DiscountApplication[],
+) {
   return (
     discountApplications
       .filter((dApp) => discountApplicationIsCouponCode(dApp)) // filter for type is discount code
@@ -22,7 +32,7 @@ function getCombinedCouponFromDiscountApplications(discountApplications) {
 }
 
 export function getLineItemDiscountFromDiscountAllocations(
-  discountAllocations,
+  discountAllocations: DiscountAllocation[],
 ) {
   const lineItemdDiscountAllocations = discountAllocations.filter((dAllo) =>
     discountApplicationIsLineItem(dAllo.discountApplication),
@@ -40,7 +50,9 @@ export function getLineItemDiscountFromDiscountAllocations(
   }
 }
 
-export function getLineItemCouponFromDiscountAllocations(discountAllocations) {
+export function getLineItemCouponFromDiscountAllocations(
+  discountAllocations: DiscountAllocation[],
+) {
   const discountApplications = discountAllocations.map(
     (dAllo) => dAllo.discountApplication,
   );
@@ -53,7 +65,7 @@ export function getLineItemCouponFromDiscountAllocations(discountAllocations) {
 }
 
 export function getWholeCartCouponFromDiscountApplications(
-  discountApplications,
+  discountApplications: DiscountApplication[],
 ) {
   const wholeCartDiscountApplications = discountApplications.filter((dApp) =>
     discountApplicationIsWholeCart(dApp),
