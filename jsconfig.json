@@ -3,7 +3,5 @@
     "target": "ESNext",
     "module": "commonjs"
   },
-  "include": [
-    "./*"
-  ]
+  "include": ["./*"]
 }

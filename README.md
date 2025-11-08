@@ -1,16 +1,56 @@
-# Shopify Custom GTM Pixel for Customer Events
+# Shopify GTM Custom Pixel for Customer Events
+
+## Background
+
+### Purpose
+
+
+This project provides a Custom Pixel for Shopify's Customer Events.
+
+The Pixel captures store events in the browser and sends them to Google Tag Manager (GTM).
+
+The Pixel enables Shopify stores to push customer interaction data like:
+
+- product views
+- cart updates
+- purchases
+
+into GTM for analytics and advertising workflows.
+
+### Context
+
+- The pixel runs within the Shopify storefront.
+- It executes in the user’s browser.
+- It pushes event data to GTM’s `dataLayer`.
 
 ## Installation
 
-1. navigate to [admin.shopify.com](https://admin.shopify.com)
-2. navigate to "Settings"
-3. navigate to "Customer events" in your store
-4. click "Add custom pixel"
-5. name it
-6. set "Permission" to "Not required"
-7. set "Data sale" to "Data collected does not qualify as data sale"
-8. copy the code from `custom-pixel.js`
-9. paste the code in "Code"
-10. update the configuration
-11. click "save" at the top of the page
-12. click "Connect"
+### Set Up
+
+- run `git clone https://github.com/SculptedSystems/shopify-gtm-custom-pixel`
+- run `cd shopify-gtm-custom-pixel`
+- run `npm install`
+
+### Configure
+
+- edit `src/config.ts` to customize for your use case
+
+### Compile
+
+- run `npm start`
+- copy the code from `dist/index.js`
+
+### Publish
+
+- navigate to [admin.shopify.com](https://admin.shopify.com)
+- navigate to "Settings"
+- navigate to "Customer events" in your store
+- click "Add custom pixel"
+- name it
+- set "Permission" to "Not required"
+- set "Data sale" to "Data collected does not qualify as data sale"
+- paste the code in "Code"
+- update the configuration
+- click "save" at the top of the page
+- click "Connect"
+

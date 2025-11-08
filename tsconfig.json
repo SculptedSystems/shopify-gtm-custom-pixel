@@ -1,0 +1,64 @@
+{
+  "compilerOptions": {
+    // === File Layout ===
+    "rootDir": "./",
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "@config": [
+        "src/config.ts"
+      ],
+      "@models/*": [
+        "src/models/*"
+      ],
+      "@core/*": [
+        "src/core/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@helpers/*": [
+        "src/helpers/*"
+      ],
+      "@events/*": [
+        "src/events/*"
+      ],
+    },
+    // === Environment Settings ===
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": [
+      "DOM",
+      "ES2020"
+    ],
+    // === Interop & Imports ===
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": false,
+    // === Style / Strictness ===
+    "strict": true,
+    "strictFunctionTypes": true,
+    "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    // === Misc ===
+    "skipLibCheck": true
+  },
+  "include": [
+    "src",
+    "tests"
+  ],
+  "exclude": [
+    "coverage",
+    "dist",
+    "node_modules"
+  ]
+}

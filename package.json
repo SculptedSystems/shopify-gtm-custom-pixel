@@ -1,20 +1,42 @@
 {
-  "name": "shopify-custom-pixels",
-  "version": "1.0.0",
-  "description": "",
-  "main": "custom-pixel.js",
+  "name": "shopify-gtm-custom-pixel",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "author": "Sculpted Systems LLC",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm-run-series check",
+    "check": "npm-run-series lint:check format:check type:check test build",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format:check": "prettier . --check",
+    "format:fix": "prettier --write .",
+    "type:check": "tsc --noEmit",
+    "test": "vitest run --config ./vitest.config.ts",
+    "test:watch": "vitest --config ./vitest.config.ts",
+    "test:coverage": "vitest run --config ./vitest.config.ts --coverage",
+    "build": "tsup"
   },
+  "homepage": "https://github.com/SculptedSystems/shopify-custom-pixels#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SculptedSystems/shopify-custom-pixels.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "",
   "bugs": {
     "url": "https://github.com/SculptedSystems/shopify-custom-pixels/issues"
   },
-  "homepage": "https://github.com/SculptedSystems/shopify-custom-pixels#readme"
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@vitest/coverage-v8": "^4.0.7",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "jsdom": "^27.1.0",
+    "npm-run-series": "^1.0.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.3",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^4.0.7"
+  }
 }

@@ -1,1 +1,4 @@
+.git/
+coverage/
+dist/
 node_modules/
