@@ -1,6 +1,7 @@
 // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#view_cart
 // https://shopify.dev/docs/api/web-pixels-api/standard-events/cart_viewed
-import { EventCartViewed, PartialCheckoutLineItem } from "@models/shopify";
+import { EventCartViewed } from "@models/shopify";
+import { PartialCheckoutLineItem } from "@models/helpers";
 
 import { createGA4ItemsFromShopifyCheckoutLineItems } from "@helpers/items";
 import { addFinalLinePriceToPartialLineItems } from "@helpers/items";
@@ -27,7 +28,6 @@ function handleViewCart(event: EventCartViewed): void {
   cart.lines.forEach((line) => {
     partialLineItems.push({
       discountAllocations: [],
-      finalLinePrice: null,
       quantity: line.quantity,
       variant: line.merchandise,
     });

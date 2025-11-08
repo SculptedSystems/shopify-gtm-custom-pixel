@@ -1,9 +1,7 @@
 // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#add_to_cart
 // https://shopify.dev/docs/api/web-pixels-api/standard-events/product_added_to_cart
-import {
-  EventProductAddedToCart,
-  PartialCheckoutLineItem,
-} from "@models/shopify";
+import { EventProductAddedToCart } from "@models/shopify";
+import { PartialCheckoutLineItem } from "@models/helpers";
 
 import { addFinalLinePriceToPartialLineItems } from "@helpers/items";
 import { createGA4ItemsFromShopifyCheckoutLineItems } from "@helpers/items";
@@ -33,7 +31,6 @@ function handleAddToCart(event: EventProductAddedToCart): void {
   const partialCheckoutLineItems: PartialCheckoutLineItem[] = [
     {
       discountAllocations: [],
-      finalLinePrice: null,
       quantity: quantity,
       variant: productVariant,
     },

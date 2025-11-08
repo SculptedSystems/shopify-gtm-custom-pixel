@@ -2,6 +2,7 @@
  * Shopify Web Pixels API - Analytics
  * Source: https://shopify.dev/docs/api/web-pixels-api/standard-api/analytics
  */
+import { Context } from "./context";
 
 export interface Analytics {
   subscribe(
@@ -236,20 +237,15 @@ export interface PricingPercentageValue {
   percentage: number;
 }
 
-export interface PartialCheckoutLineItem {
-  // not native to Shopify
+export interface CheckoutLineItem {
   discountAllocations: DiscountAllocation[];
-  finalLinePrice: MoneyV2 | null;
-  quantity: number;
-  variant: ProductVariant | null;
-}
-
-export interface CheckoutLineItem extends PartialCheckoutLineItem {
   finalLinePrice: MoneyV2;
   id: string;
   properties: Property[];
+  quantity: number;
   sellingPlanAllocation: SellingPlanAllocation | null;
   title: string | null;
+  variant: ProductVariant | null;
 }
 
 export interface DiscountAllocation {
@@ -370,61 +366,4 @@ export interface Cart {
   id: string | null;
   lines: CartLine[];
   totalQuantity: number;
-}
-
-/**
- Contex
- */
-
-export interface Context {
-  document: WebPixelsDocument;
-  navigator: WebPixelsNavigator;
-  window: WebPixelsWindow;
-}
-
-export interface WebPixelsDocument {
-  characterSet: string;
-  location: Location;
-  referrer: string;
-  title: string;
-}
-
-export interface Location {
-  hash: string;
-  host: string;
-  hostname: string;
-  href: string;
-  origin: string;
-  pathname: string;
-  port: string;
-  protocol: string;
-  search: string;
-}
-
-export interface WebPixelsNavigator {
-  cookieEnabled: boolean;
-  language: string;
-  languages: string[];
-  userAgent: string;
-}
-
-export interface WebPixelsWindow {
-  innerHeight: number;
-  innerWidth: number;
-  location: Location;
-  origin: string;
-  outerHeight: number;
-  outerWidth: number;
-  pageXOffset: number;
-  pageYOffset: number;
-  screen: Screen;
-  screenX: number;
-  screenY: number;
-  scrollX: number;
-  scrollY: number;
-}
-
-export interface Screen {
-  height: number;
-  width: number;
 }

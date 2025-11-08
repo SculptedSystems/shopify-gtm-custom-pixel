@@ -4,7 +4,6 @@
 
 ### Purpose
 
-
 This project provides a Custom Pixel for Shopify's Customer Events.
 
 The Pixel captures store events in the browser and sends them to Google Tag Manager (GTM).
@@ -53,4 +52,3 @@ into GTM for analytics and advertising workflows.
 - update the configuration
 - click "save" at the top of the page
 - click "Connect"
-

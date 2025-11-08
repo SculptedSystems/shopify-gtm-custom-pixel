@@ -1,6 +1,7 @@
 // https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtag#view_item
 // https://shopify.dev/docs/api/web-pixels-api/standard-events/product_viewed
-import { EventProductViewed, PartialCheckoutLineItem } from "@models/shopify";
+import { EventProductViewed } from "@models/shopify";
+import { PartialCheckoutLineItem } from "@models/helpers";
 
 import { addFinalLinePriceToPartialLineItems } from "@helpers/items";
 import { createGA4ItemsFromShopifyCheckoutLineItems } from "@helpers/items";
@@ -22,7 +23,6 @@ function handleViewItem(event: EventProductViewed): void {
   const partialLineItems: PartialCheckoutLineItem[] = [
     {
       discountAllocations: [],
-      finalLinePrice: null,
       quantity: 1,
       variant: productVariant,
     },
