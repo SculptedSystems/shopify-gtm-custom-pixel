@@ -8,11 +8,8 @@
       "@config": [
         "src/config.ts"
       ],
-      "@models/*": [
-        "src/models/*"
-      ],
-      "@models/shopify": [
-        "src/models/shopify"
+      "@models": [
+        "src/models"
       ],
       "@core/*": [
         "src/core/*"

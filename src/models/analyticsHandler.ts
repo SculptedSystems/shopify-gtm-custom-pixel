@@ -1,4 +1,4 @@
-import type { AnalyticsEvent } from "@models/shopify";
+import type { AnalyticsEvent } from "@models";
 
 /**
  * A handler function for analytics events.

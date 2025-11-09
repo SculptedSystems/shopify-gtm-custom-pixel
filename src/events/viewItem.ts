@@ -2,7 +2,7 @@
 // https://shopify.dev/docs/api/web-pixels-api/standard-events/product_viewed
 
 import { PixelEventsProductViewed } from "@sculptedsystems/shopify-web-pixels-api-types";
-import { PartialCheckoutLineItem } from "@models/helpers";
+import { PartialCheckoutLineItem } from "@models";
 
 import { addFinalLinePriceToPartialLineItems } from "@helpers/items";
 import { createGA4ItemsFromShopifyCheckoutLineItems } from "@helpers/items";

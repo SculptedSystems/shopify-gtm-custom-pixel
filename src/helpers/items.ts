@@ -1,8 +1,8 @@
-import { Item } from "@models/ga4";
 import {
+  Item,
   PartialCheckoutLineItem,
   PartialCheckoutLineItemWithFinalLinePrice,
-} from "@models/helpers";
+} from "@models";
 
 import { config } from "@config";
 

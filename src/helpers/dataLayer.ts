@@ -1,4 +1,4 @@
-import { DataLayerMessage } from "@models/locals";
+import { DataLayerMessage } from "@models";
 import { logger } from "@utils/logger";
 import { stringifyObject } from "@utils/stringify";
 

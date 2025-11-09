@@ -1,7 +1,6 @@
 import { logger } from "./logger";
 import { stringifyObject } from "./stringify";
-import { AnalyticsEvent } from "@models/shopify";
-import { AnalyticsEventHandler } from "@models/utils";
+import { AnalyticsEvent, AnalyticsEventHandler } from "@models";
 
 export function buildEventHandler<T extends AnalyticsEvent>(
   handler: AnalyticsEventHandler<T>,

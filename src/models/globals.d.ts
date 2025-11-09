@@ -1,8 +1,7 @@
 // ================================================
 //   Global Declarations
 // ================================================
-import { Analytics, Init } from "@models/shopify";
-import { DataLayer } from "@models/locals";
+import { Analytics, Init, DataLayer } from "@models";
 
 export {};
 
