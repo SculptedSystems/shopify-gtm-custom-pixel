@@ -39,9 +39,11 @@ function handleViewCart(event: PixelEventsCartViewed): void {
 
   dataLayerPush({
     event: "view_cart",
-    currency: currency,
-    value: value,
-    items: items,
+    ecommerce: {
+      currency: currency,
+      value: value,
+      items: items,
+    },
   });
 }
 

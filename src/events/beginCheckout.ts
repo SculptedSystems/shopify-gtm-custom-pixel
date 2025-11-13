@@ -29,10 +29,12 @@ function handleBeginCheckout(event: PixelEventsCheckoutStarted): void {
 
   dataLayerPush({
     event: "begin_checkout",
-    currency: currency,
-    value: value,
-    coupon: coupon,
-    items: items,
+    ecommerce: {
+      currency: currency,
+      value: value,
+      coupon: coupon,
+      items: items,
+    },
   });
 }
 

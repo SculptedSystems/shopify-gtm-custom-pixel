@@ -33,11 +33,13 @@ function handleAddPaymentInfo(event: PixelEventsPaymentInfoSubmitted): void {
 
   dataLayerPush({
     event: "add_payment_info",
-    currency: currency,
-    value: value,
-    coupon: coupon,
-    payment_type: payment_type,
-    items: items,
+    ecommerce: {
+      currency: currency,
+      value: value,
+      coupon: coupon,
+      payment_type: payment_type,
+      items: items,
+    },
   });
 }
 

@@ -34,8 +34,10 @@ function handleViewItemList(event: PixelEventsCollectionViewed): void {
 
   dataLayerPush({
     event: "view_item_list",
-    currency: currency,
-    items: items,
+    ecommerce: {
+      currency: currency,
+      items: items,
+    },
   });
 }
 
