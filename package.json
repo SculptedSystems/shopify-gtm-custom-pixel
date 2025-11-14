@@ -1,6 +1,6 @@
 {
   "name": "shopify-gtm-custom-pixel",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "license": "Apache-2.0",
   "author": "Sculpted Systems LLC",
   "main": "dist/index.js",

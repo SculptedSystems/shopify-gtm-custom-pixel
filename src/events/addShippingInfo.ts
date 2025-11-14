@@ -33,11 +33,13 @@ function handleAddShippingInfo(event: PixelEventsPaymentInfoSubmitted): void {
 
   dataLayerPush({
     event: "add_shipping_info",
-    currency: currency,
-    value: value,
-    coupon: coupon,
-    shipping_tier: shipping_tier,
-    items: items,
+    ecommerce: {
+      currency: currency,
+      value: value,
+      coupon: coupon,
+      shipping_tier: shipping_tier,
+      items: items,
+    },
   });
 }
 

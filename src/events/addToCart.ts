@@ -43,9 +43,11 @@ function handleAddToCart(event: PixelEventsProductAddedToCart): void {
 
   dataLayerPush({
     event: "add_to_cart",
-    currency: currency,
-    value: value,
-    items: items,
+    ecommerce: {
+      currency: currency,
+      value: value,
+      items: items,
+    },
   });
 }
 

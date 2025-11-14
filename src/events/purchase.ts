@@ -48,16 +48,18 @@ function handlePurchase(event: PixelEventsCheckoutCompleted): void {
 
   dataLayerPush({
     event: "purchase",
-    currency: currency,
-    value: value,
-    customer_type: customer_type,
-    transaction_id: transaction_id,
-    coupon: coupon,
-    shipping: shipping,
-    tax: tax,
-    payment_type: payment_type,
-    payment_gateway: payment_gateway,
-    items: items,
+    ecommerce: {
+      currency: currency,
+      value: value,
+      customer_type: customer_type,
+      transaction_id: transaction_id,
+      coupon: coupon,
+      shipping: shipping,
+      tax: tax,
+      payment_type: payment_type,
+      payment_gateway: payment_gateway,
+      items: items,
+    },
   });
 }
 
