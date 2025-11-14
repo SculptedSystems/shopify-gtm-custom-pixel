@@ -73,35 +73,3 @@ jobs:
         with:
           name: dist
           path: dist
-
-  # 🚀 Publish to npm via OIDC (Trusted Publisher)
-  publish:
-    name: Publish to npm (Trusted Publisher)
-    needs: [build]
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js for npm publish
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: "https://registry.npmjs.org/"
-
-      - name: Update NPM
-        run: npm install -g npm@latest
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run checks (pre-publish safety)
-        run: npm run check
-
-      - name: Build package
-        run: npm run build
-
-      - name: Publish to npm (Trusted Publisher)
-        run: npm publish
